@@ -1,6 +1,10 @@
+function random(number) {
+    return Math.floor(Math.random() * number);
+}
+
 //Randomly returns rock, paper, or scissors
 function getComputerChoice() {
-    let rpsValue = Math.trunc(Math.random() * 3);
+    let rpsValue = random(3);
 
     switch (rpsValue) {
         case 0:
@@ -9,15 +13,15 @@ function getComputerChoice() {
             return "Paper";
         case 2:
             return "Scissors";
-    }
-}
+    };
+};
 
 //Returns user choice, assuming they will always return a valid choice.
 function getHumanChoice() {
     let choice = prompt("Type your choice: ");
 
     return (choice);
-}
+};
 
 //Plays 5 rounds of playRound.
 function playGame() {
@@ -27,17 +31,19 @@ function playGame() {
     //Plays a single round of rps, tallies score, and logs the winner.
     function playRound (humanChoice, computerChoice) {
         //makes humanChoice case-insensitive
-        humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
+        humanChoice = 
+            humanChoice.charAt(0).toUpperCase() + 
+            humanChoice.slice(1).toLowerCase();
 
         let win = () => {
             console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
             humanScore++;
-        }
+        };
 
         let lose = () => {
             console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
             computerScore++;
-        }
+        };
 
         if (humanChoice === computerChoice) {
             console.log(`You tied with ${humanChoice}! Noone wins.`);
@@ -50,18 +56,18 @@ function playGame() {
         } else if (humanChoice === "Scissors") {
             if (computerChoice === "Paper") win();
             if (computerChoice === "Rock") lose();
-        }
-    }
+        };
+    };
 
     for (let i = 0; i < 5; i++) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
-    }
+    };
 
     console.log(humanScore);
     console.log(computerScore);
-}
+};
 
 
 playGame();
