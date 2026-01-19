@@ -22,5 +22,40 @@ function getHumanChoice() {
     return (choice);
 }
 
-console.log(getHumanChoice());
-console.log(getComputerChoice());
+//Plays a single round of rps, tallies score, and logs the winner.
+function playRound (humanChoice, computerChoice) {
+    //makes humanChoice case-insensitive
+    humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
+
+    let win = () => {
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+        humanScore++;
+    }
+
+    let lose = () => {
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+        computerScore++;
+    }
+
+    if (humanChoice === computerChoice) {
+        console.log(`You tied with ${humanChoice}! Noone wins.`);
+    } else if (humanChoice === "Rock") {
+        if (computerChoice === "Scissors") win();
+        if (computerChoice === "Paper") lose();
+    } else if (humanChoice === "Paper") {
+        if (computerChoice === "Rock") win();
+        if (computerChoice === "Scissors") lose();
+    } else if (humanChoice === "Scissors") {
+        if (computerChoice === "Paper") win();
+        if (computerChoice === "Rock") lose();
+    }
+
+}
+
+
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
+console.log(humanScore);
+console.log(computerScore);
