@@ -13,15 +13,15 @@ function getComputerChoice() {
             return "Paper";
         case 2:
             return "Scissors";
-    };
-};
+    }
+}
 
 //Returns user choice, assuming they will always return a valid choice.
 function getHumanChoice() {
     let choice = prompt("Type your choice: ");
 
     return (choice);
-};
+}
 
 //Plays 5 rounds of playRound.
 function playGame() {
@@ -38,12 +38,12 @@ function playGame() {
         let win = () => {
             console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
             humanScore++;
-        };
+        }
 
         let lose = () => {
             console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
             computerScore++;
-        };
+        }
 
         if (humanChoice === computerChoice) {
             console.log(`You tied with ${humanChoice}! Noone wins.`);
@@ -56,18 +56,18 @@ function playGame() {
         } else if (humanChoice === "Scissors") {
             if (computerChoice === "Paper") win();
             if (computerChoice === "Rock") lose();
-        };
-    };
+        }
+    }
 
     for (let i = 0; i < 5; i++) {
         const humanSelection = getHumanChoice();
         const computerSelection = getComputerChoice();
         playRound(humanSelection, computerSelection);
-    };
+    }
 
     console.log(humanScore);
     console.log(computerScore);
-};
+}
 
 
 playGame();
