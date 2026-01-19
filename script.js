@@ -1,6 +1,3 @@
-let humanScore = 0;
-let computerScore = 0;
-
 //Randomly returns rock, paper, or scissors
 function getComputerChoice() {
     let rpsValue = Math.trunc(Math.random() * 3);
@@ -22,40 +19,52 @@ function getHumanChoice() {
     return (choice);
 }
 
-//Plays a single round of rps, tallies score, and logs the winner.
-function playRound (humanChoice, computerChoice) {
-    //makes humanChoice case-insensitive
-    humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
+//Plays 5 rounds of playRound.
+function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
 
-    let win = () => {
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-        humanScore++;
+    //Plays a single round of rps, tallies score, and logs the winner.
+    function playRound (humanChoice, computerChoice) {
+        //makes humanChoice case-insensitive
+        humanChoice = humanChoice.charAt(0).toUpperCase() + humanChoice.slice(1).toLowerCase();
+
+        let win = () => {
+            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+            humanScore++;
+        }
+
+        let lose = () => {
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+            computerScore++;
+        }
+
+        if (humanChoice === computerChoice) {
+            console.log(`You tied with ${humanChoice}! Noone wins.`);
+        } else if (humanChoice === "Rock") {
+            if (computerChoice === "Scissors") win();
+            if (computerChoice === "Paper") lose();
+        } else if (humanChoice === "Paper") {
+            if (computerChoice === "Rock") win();
+            if (computerChoice === "Scissors") lose();
+        } else if (humanChoice === "Scissors") {
+            if (computerChoice === "Paper") win();
+            if (computerChoice === "Rock") lose();
+        }
     }
 
-    let lose = () => {
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-        computerScore++;
+    for (let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
     }
 
-    if (humanChoice === computerChoice) {
-        console.log(`You tied with ${humanChoice}! Noone wins.`);
-    } else if (humanChoice === "Rock") {
-        if (computerChoice === "Scissors") win();
-        if (computerChoice === "Paper") lose();
-    } else if (humanChoice === "Paper") {
-        if (computerChoice === "Rock") win();
-        if (computerChoice === "Scissors") lose();
-    } else if (humanChoice === "Scissors") {
-        if (computerChoice === "Paper") win();
-        if (computerChoice === "Rock") lose();
-    }
-
+    console.log(humanScore);
+    console.log(computerScore);
 }
 
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+playGame();
 
-playRound(humanSelection, computerSelection);
-console.log(humanScore);
-console.log(computerScore);
+
+
