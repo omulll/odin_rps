@@ -1,3 +1,6 @@
+let humanScore = 0;
+let computerScore = 0;
+
 //Randomly returns rock, paper, or scissors
 function getComputerChoice() {
     let rpsValue = Math.trunc(Math.random() * 3);
@@ -12,6 +15,12 @@ function getComputerChoice() {
     }
 }
 
+//Returns user choice, assuming they will always return a valid choice.
+function getHumanChoice() {
+    let choice = prompt("Type your choice: ");
 
+    return (choice);
+}
 
+console.log(getHumanChoice());
 console.log(getComputerChoice());
